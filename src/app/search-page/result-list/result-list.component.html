@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Track</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Release</th>
+      <th scope="col">Collection</th>
+      <th scope="col">Sample</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let music of musicList">
+    <tr>
+      <td>{{ (music.trackCensoredName.length > 20) ?
+          music.trackCensoredName.substring(0, 20) + '...'
+          : music.trackCensoredName }}</td>
+      <td>{{ (music.artistName.length > 20) ?
+        music.artistName.substring(0, 20) + '...'
+        : music.artistName }}</td>
+      <td>{{ music.primaryGenreName }}</td>
+      <td>{{ music.releaseDate.substring(0, 10) }}</td>
+      <td>{{ (music.collectionCensoredName.length > 20) ?
+          music.collectionCensoredName.substring(0, 20) + '...'
+          : music.collectionCensoredName }}</td>
+      <td><a href="{{ music.previewUrl }}">link</a></td>
+    </tr>
+  </tbody>
+</table>

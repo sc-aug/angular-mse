@@ -1,8 +1,14 @@
-<!-- Main component for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <h1>Home Page Hello World!</h1>
-  <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-  <p>
-    Hello
-  </p>
-</div>
+<div id="search-box" class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..."
+        [(ngModel)]="words" required>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"
+          (click)="onSearch()">Search on iTunes</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<app-result-list [musicList]="musicList"></app-result-list>
