@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavTopComponent } from './nav-top/nav-top.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { ResultListComponent } from './search-page/result-list/result-list.component';
 import { FavPageComponent } from './fav-page/fav-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { AuthComponent } from './auth/auth.component';
@@ -16,10 +17,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 
+import { MusicPageComponent } from './music-page/music-page.component';
+import { ArtistPageComponent } from './artist-page/artist-page.component';
+
 import { AppRoutes } from './app.routes';
-import { ResultListComponent } from './search-page/result-list/result-list.component';
 
 import { SearchService } from './search-page/search.service';
+import { MusicService } from './music-page/music.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { SearchService } from './search-page/search.service';
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
-    ResultListComponent
+    ResultListComponent,
+    MusicPageComponent,
+    ArtistPageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,8 @@ import { SearchService } from './search-page/search.service';
     AppRoutes
   ],
   providers: [
-    SearchService
+    SearchService,
+    MusicService
   ],
   bootstrap: [
     AppComponent

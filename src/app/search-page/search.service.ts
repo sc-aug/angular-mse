@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 // import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Music } from '../music.interface';
+import { Music } from '../music-page/music.interface';
 
 @Injectable()
 export class SearchService {
@@ -16,8 +16,8 @@ export class SearchService {
         return this.http.get<Music[]>(tmp, {responseType: 'json'})
         .pipe(
             tap( // Log the result or error
-                data => console.log(data),
-                error => console.log('error'))
+                // data => console.log(data),
+                error => console.log(error))
         );
     }
 

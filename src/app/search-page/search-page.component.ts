@@ -8,7 +8,6 @@ import { SearchService } from './search.service';
 })
 export class SearchPageComponent implements OnInit {
   words = "";
-  temp = null;
   musicList;
   constructor(private searchService: SearchService) { }
 
@@ -16,9 +15,12 @@ export class SearchPageComponent implements OnInit {
   }
 
   onSearch() {
-    this.searchService.dummyCall("jack+johnson")
+    this.getSearchResult(this.words.trim().replace(/\s+/g, '+'));
+  }
+
+  getSearchResult(term: string) {
+    this.searchService.dummyCall(term)
     .subscribe(data => {
-      console.log(data);
       this.musicList = data['results'];
     })
   }
