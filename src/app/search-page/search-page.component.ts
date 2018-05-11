@@ -22,6 +22,7 @@ export class SearchPageComponent implements OnInit {
     this.searchService.dummyCall(term)
     .subscribe(data => {
       this.musicList = data['results'];
+      console.log(this.musicList);
     })
   }
 

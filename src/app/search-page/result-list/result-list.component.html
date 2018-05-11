@@ -1,6 +1,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">#</th>
       <th scope="col">Track</th>
       <th scope="col">Artist</th>
       <th scope="col">Genre</th>
@@ -9,8 +10,9 @@
       <th scope="col">Sample</th>
     </tr>
   </thead>
-  <tbody *ngFor="let music of musicList">
+  <tbody *ngFor="let music of musicList; let i = index">
     <tr>
+      <td>{{ i+1 }}</td>
       <td><a
         [routerLink]="['/music']"
         [queryParams]="{ artistId: music.artistId, trackId: music.trackId }">
