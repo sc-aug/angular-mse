@@ -15,14 +15,14 @@ export class AuthService {
         let registerObservable = Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(username, password)
         .then((res) => {
             console.log(res);
-            this.router.navigate(['/']);
+            // this.router.navigate(['/']);
             firebase.auth().currentUser.getIdToken()
             .then((token:string) => {
                 this.token = token;
                 localStorage.setItem('userToken', token);
             });
         }).catch((error) => {
-        console.log(error);
+            console.log(error);
         }));
 
         return registerObservable;
@@ -32,14 +32,14 @@ export class AuthService {
         let loginObservable = Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(username, password)
         .then((res) => {
             console.log(res);
-            this.router.navigate(['/']);
+            // this.router.navigate(['/']);
             firebase.auth().currentUser.getIdToken()
             .then((token:string) => {
                 this.token = token;
                 localStorage.setItem('userToken', token);
             });
         }).catch((error) => {
-        console.log(error);
+            console.log(error);
         }));
 
         return loginObservable;

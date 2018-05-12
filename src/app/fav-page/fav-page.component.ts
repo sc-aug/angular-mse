@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fav-page.component.css']
 })
 export class FavPageComponent implements OnInit {
-
+  db: any;
   constructor() { }
 
   ngOnInit() {
   }
-
 }

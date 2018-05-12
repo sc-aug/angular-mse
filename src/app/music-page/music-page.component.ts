@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { MusicService } from './music.service';
+import { SearchService } from '../core/search.service';
 import { Music } from './music.interface';
 
 @Component({
@@ -14,7 +14,7 @@ export class MusicPageComponent implements OnInit {
   musicStr: string;
   constructor(
     private route: ActivatedRoute,
-    private musicService: MusicService) { }
+    private searchService: SearchService) { }
 
   ngOnInit() {
     const qp = this.route.snapshot.queryParams;
@@ -25,7 +25,7 @@ export class MusicPageComponent implements OnInit {
   }
 
   getMusicDetail(artistId: string, trackId: string) {
-    this.musicService.retrieveMusicById(artistId, trackId)
+    this.searchService.retrieveMusicById(artistId, trackId)
       .subscribe(data => {
         if (data) {
           this.music = data;

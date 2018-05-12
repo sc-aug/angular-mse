@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { Account } from '../account.interface';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../core/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -25,7 +25,16 @@ export class RegisterComponent implements OnInit {
   }
 
   register(e: string, p: string) {
-    this.auth.registerUser(e, p);
+    this.auth.registerUser(e, p).subscribe(
+      data => {
+        //this.router.navigate([this.returnUrl]);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
+
+
 
 }

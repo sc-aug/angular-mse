@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { Account } from '../account.interface';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../core/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   login(e: string, p: string) {
     this.auth.loginUser(e, p).subscribe(
       data => {
-        this.router.navigate([this.returnUrl]);
+        //this.router.navigate([this.returnUrl]);
       },
       err => {
         console.log(err);

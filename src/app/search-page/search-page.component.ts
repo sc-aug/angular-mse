@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from './search.service';
+import { SearchService } from '../core/search.service';
 
 @Component({
   selector: 'app-search-page',
@@ -19,7 +19,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   getSearchResult(term: string) {
-    this.searchService.dummyCall(term)
+    this.searchService.searchByTerm(term)
     .subscribe(data => {
       this.musicList = data['results'];
       console.log(this.musicList);

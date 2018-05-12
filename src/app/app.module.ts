@@ -24,9 +24,8 @@ import { ArtistPageComponent } from './artist-page/artist-page.component';
 // Routing
 import { AppRoutes } from './app.routes';
 // Serivces
-import { SearchService } from './search-page/search.service';
-import { MusicService } from './music-page/music.service';
-import { AuthService } from './auth/auth.service';
+import { SearchService } from './core/search.service';
+import { AuthService } from './core/auth.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { AuthService } from './auth/auth.service';
   ],
   providers: [
     SearchService,
-    MusicService,
     AuthService
   ],
   bootstrap: [
