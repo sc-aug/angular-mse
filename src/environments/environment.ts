@@ -5,5 +5,15 @@
 
 export const environment = {
   production: false,
-  "itunes-api-url": ""
+  "itunes-api-url": "https://itunes.apple.com/",
+  "firebase-auth-api": "https://mse-auth-api.firebaseapp.com/",
+  "firebaseConfig": {
+    apiKey: "AIzaSyADdzg3zsU2uEHTf2L2D3RPEcXQzdGjJzE",
+    authDomain: "mse-auth-api.firebaseapp.com",
+    databaseURL: "https://mse-auth-api.firebaseio.com",
+    projectId: "mse-auth-api",
+    storageBucket: "mse-auth-api.appspot.com",
+    messagingSenderId: "854894758777",
+    timestampsInSnapshots: true
+  }
 };

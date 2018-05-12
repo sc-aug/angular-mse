@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, NgForm } from '@angular/forms';
+import { Account } from '../account.interface';
+import { AuthService } from '../auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  returnUrl:string;
+  
+  constructor(
+    private auth:AuthService,
+    private router:Router,
+    private route:ActivatedRoute) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onSubmit(form: NgForm) {
+    let data = form.value;
+    this.register(data.email, data.password);
+  }
+
+  register(e: string, p: string) {
+    this.auth.registerUser(e, p);
   }
 
 }
