@@ -2,10 +2,24 @@ table {
     margin-top: 20px;
 }
 
+table tbody tr td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sample {
+    padding-top: 5px !important;
+    padding-bottom: 0px !important;
+}
+
 audio {
     width: 70px;
 }
 
 audio::-webkit-media-controls-timeline {
     display: none;
+}
+
+i {
+    cursor:pointer;
 }

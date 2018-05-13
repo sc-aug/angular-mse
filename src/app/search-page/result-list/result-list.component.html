@@ -1,7 +1,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">#####</th>
       <th scope="col">Track</th>
       <th scope="col">Artist</th>
       <th scope="col">Genre</th>
@@ -12,7 +12,7 @@
   </thead>
   <tbody *ngFor="let music of musicList; let i = index">
     <tr>
-      <td>{{ i+1 }}</td>
+      <td><i class="fa fa-heart-o"></i></td>
       <td><a
         [routerLink]="['/music']"
         [queryParams]="{ artistId: music.artistId, trackId: music.trackId }">
@@ -38,7 +38,7 @@
               : music.collectionCensoredName)
             : "-" }}</a>
       </td>
-      <td>
+      <td class="sample">
         <audio controls controlsList="nodownload" preload="none">
           <source src="{{ music.previewUrl }}" type="audio/mp4">
           audio element not supported.
