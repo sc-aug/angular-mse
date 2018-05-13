@@ -14,8 +14,7 @@
     <tr>
       <td><i class="fa fa-heart-o"></i></td>
       <td><a
-        [routerLink]="['/music']"
-        [queryParams]="{ artistId: music.artistId, trackId: music.trackId }">
+        [routerLink]="['/music', music.trackId]">
         {{ (music.trackCensoredName.length > 20) ?
           music.trackCensoredName.substring(0, 20) + '...'
           : music.trackCensoredName }}</a>

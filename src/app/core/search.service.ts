@@ -22,17 +22,18 @@ export class SearchService {
         );
     }
 
-    retrieveMusicById(artistId: string, trackId: string) {
-        let url = `${baseurl}lookup?id=${artistId}&entity=song`;
+    retrieveMusicById(trackId: string) {
+        let url = `${baseurl}search?term=${trackId}`;
+
+        https://itunes.apple.com/search?term=659234741
 
         return this.http.get<Music>(url, {responseType: 'json'})
             .pipe(
                 map(data => data['results']),
                 map((music) => {
-                    for (let index in music) {
-                        if (music[index]['trackId'] === +trackId) {
-                            return music[index];
-                        }
+                    if (music) {
+                        console.log(music);
+                        return music[0];
                     }
                     return null;
                 }),

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { SearchService } from '../core/search.service';
 import { Music } from './music.interface';
@@ -9,23 +10,31 @@ import { Music } from './music.interface';
   templateUrl: './music-page.component.html',
   styleUrls: ['./music-page.component.css']
 })
-export class MusicPageComponent implements OnInit {
+export class MusicPageComponent implements OnInit, OnDestroy {
   music: any;
   musicStr: string;
+  paramSub: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private searchService: SearchService) { }
 
   ngOnInit() {
-    const qp = this.route.snapshot.queryParams;
-    console.log(qp);
-    if (qp['trackId'] && qp['artistId']) {
-      this.getMusicDetail(qp['artistId'], qp['trackId']);
-    }
+    this.paramSub = this.route.params
+    .subscribe(
+      (param: Params) => {
+        if (param.id) {
+          this.getMusicDetail(param['id']);
+        }
+    });
   }
 
-  getMusicDetail(artistId: string, trackId: string) {
-    this.searchService.retrieveMusicById(artistId, trackId)
+  ngOnDestroy() {
+    this.paramSub.unsubscribe();
+  }
+
+  getMusicDetail(trackId: string) {
+    this.searchService.retrieveMusicById(trackId)
       .subscribe(data => {
         if (data) {
           this.music = data;

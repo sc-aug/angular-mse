@@ -17,7 +17,8 @@ const APP_ROUTES: Routes = [
   { path: 'fav', component: FavPageComponent },
   { path: 'about', component: AboutPageComponent },
   { path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
-  { path: 'music', component: MusicPageComponent },
+  { path: 'music', redirectTo: '/search', pathMatch: 'full' },
+  { path: 'music/:id', component: MusicPageComponent },
   { path: 'artist', redirectTo: '/search', pathMatch: 'full' },
   { path: 'artist/:id', component: ArtistPageComponent}
 ];
