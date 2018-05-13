@@ -1,3 +1,11 @@
 table {
     margin-top: 20px;
 }
+
+audio {
+    width: 70px;
+}
+
+audio::-webkit-media-controls-timeline {
+    display: none;
+}
