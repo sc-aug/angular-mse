@@ -19,7 +19,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   getSearchResult(term: string) {
-    this.searchService.searchByTerm(term)
+    this.searchService.searchMusicByTerm(term)
     .subscribe(data => {
       this.musicList = data['results'];
       console.log(this.musicList);

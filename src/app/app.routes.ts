@@ -17,8 +17,9 @@ const APP_ROUTES: Routes = [
   { path: 'fav', component: FavPageComponent },
   { path: 'about', component: AboutPageComponent },
   { path: 'auth', component: AuthComponent, children: AUTH_ROUTES },
-  { path: 'music', component: MusicPageComponent }, //, children: MUSIC_ROUTES },
-  { path: 'artist', component: ArtistPageComponent }
+  { path: 'music', component: MusicPageComponent },
+  { path: 'artist', redirectTo: '/search', pathMatch: 'full' },
+  { path: 'artist/:id', component: ArtistPageComponent}
 ];
 
 export const AppRoutes = RouterModule.forRoot(APP_ROUTES, { useHash: true });
