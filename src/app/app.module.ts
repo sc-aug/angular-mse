@@ -28,6 +28,8 @@ import { SearchService } from './core/search.service';
 import { AuthService } from './core/auth.service';
 import { DbService } from './core/db.service';
 import { SearchBoxComponent } from './search-page/search-box/search-box.component';
+import { FavTableComponent } from './fav-page/fav-table/fav-table.component';
+import { FavTableRowComponent } from './fav-page/fav-table-row/fav-table-row.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { SearchBoxComponent } from './search-page/search-box/search-box.componen
     ResultListComponent,
     MusicPageComponent,
     ArtistPageComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    FavTableComponent,
+    FavTableRowComponent
   ],
   imports: [
     BrowserModule,

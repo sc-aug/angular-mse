@@ -13,22 +13,47 @@ export class DbService {
         this.db = firebase.firestore();
     }
 
-    addFav() {
-        let uId = "";
-        this.db.collection("fav-music").get().then((col) => {
+    addFav(trackId: string) {
+        let email = this.getEmail();
+        let item = {};
+        item[trackId] = [];
+
+        this.db.collection("fav-music").doc(email)
+        .set(item, { merge: true })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
         });
     }
 
-    rmFav() {
-        
+    rmFav(trackId: string) {
+        let email = this.getEmail();
+        let item = {};
+        item[trackId] = firebase.firestore.FieldValue.delete();
+
+        this.db.collection("fav-music").doc(email)
+        .update({item})
+        .then(function() {
+            console.log("trackId removed!");
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error removing trackId from doc: ", error);
+        });
     }
 
-    listFav() {
-        this.db.collection("fav-music").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-            });
-        });
+    getFavList() {
+        let email = this.getEmail();
+
+        let favListObservable = Observable.fromPromise<any[]>(
+            this.db.collection("fav-music").doc(email).get()
+                .then((docSnapshot) => {
+                    return Object.keys(docSnapshot.data());
+                })
+            );
+        return favListObservable;
     }
 
     dummyCall1() {
@@ -74,4 +99,8 @@ export class DbService {
         });
     }
 
+    getEmail() {
+        localStorage.getItem("email");
+        return "admin@admin.com"
+    }
 }

@@ -9,9 +9,18 @@ import { DbService } from '../core/db.service';
 })
 export class FavPageComponent implements OnInit {
   db: any;
+  favList: any[];
   constructor(private dbService: DbService) { }
 
   ngOnInit() {
+    this.dbService.getFavList()
+      .subscribe((list) => {
+        if (list) {
+          this.favList = list
+        } else {
+          console.log("fetch favorite list failed");
+        }
+      });
   }
 
   onButton1() {

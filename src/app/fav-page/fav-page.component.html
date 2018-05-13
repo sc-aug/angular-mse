@@ -1,7 +1,5 @@
-<p>
-  fav-page works!
-</p>
-<input type="button" value="b1 add" (click)="onButton1()">
-<input type="button" value="b2 get " (click)="onButton2()">
-<input type="button" value="b3 set + " (click)="onButton3()">
-<input type="button" value="b4 update" (click)="onButton4()">
+<h2>My Favorite List</h2>
+
+<app-fav-table
+  [trackIdList]="favList">
+</app-fav-table>
