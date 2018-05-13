@@ -26,6 +26,8 @@ import { AppRoutes } from './app.routes';
 // Serivces
 import { SearchService } from './core/search.service';
 import { AuthService } from './core/auth.service';
+import { DbService } from './core/db.service';
+import { SearchBoxComponent } from './search-page/search-box/search-box.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AuthService } from './core/auth.service';
     LogoutComponent,
     ResultListComponent,
     MusicPageComponent,
-    ArtistPageComponent
+    ArtistPageComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +53,9 @@ import { AuthService } from './core/auth.service';
     AppRoutes
   ],
   providers: [
-    SearchService,
-    AuthService
+    // SearchService,
+    AuthService,
+    DbService
   ],
   bootstrap: [
     AppComponent

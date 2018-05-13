@@ -25,8 +25,6 @@ export class SearchService {
     retrieveMusicById(trackId: string) {
         let url = `${baseurl}search?term=${trackId}`;
 
-        https://itunes.apple.com/search?term=659234741
-
         return this.http.get<Music>(url, {responseType: 'json'})
             .pipe(
                 map(data => data['results']),

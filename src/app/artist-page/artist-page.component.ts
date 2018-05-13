@@ -8,7 +8,8 @@ import { Music } from '../music-page/music.interface'
 @Component({
   selector: 'app-artist-page',
   templateUrl: './artist-page.component.html',
-  styleUrls: ['./artist-page.component.css']
+  styleUrls: ['./artist-page.component.css'],
+  providers: [SearchService]
 })
 export class ArtistPageComponent implements OnInit, OnDestroy {
   artistStr: string;

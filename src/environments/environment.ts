@@ -8,12 +8,14 @@ export const environment = {
   "itunes-api-url": "https://itunes.apple.com/",
   "firebase-auth-api": "https://mse-auth-api.firebaseapp.com/",
   "firebaseConfig": {
-    apiKey: "AIzaSyADdzg3zsU2uEHTf2L2D3RPEcXQzdGjJzE",
-    authDomain: "mse-auth-api.firebaseapp.com",
-    databaseURL: "https://mse-auth-api.firebaseio.com",
-    projectId: "mse-auth-api",
-    storageBucket: "mse-auth-api.appspot.com",
-    messagingSenderId: "854894758777",
+    apiKey: "AIzaSyBvVLLPD_nhjzIXCuV4k5NClCr0NHBRAk8",
+    authDomain: "mse-firebase-api.firebaseapp.com",
+    databaseURL: "https://mse-firebase-api.firebaseio.com",
+    projectId: "mse-firebase-api",
+    storageBucket: "mse-firebase-api.appspot.com",
+    messagingSenderId: "934996565302",
     timestampsInSnapshots: true
   }
 };
+
+

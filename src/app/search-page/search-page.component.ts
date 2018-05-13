@@ -1,29 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SearchService } from '../core/search.service';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.css']
+  styleUrls: ['./search-page.component.css'],
+  providers: [SearchService]
 })
-export class SearchPageComponent implements OnInit {
-  words = "";
+export class SearchPageComponent {
   musicList;
-  constructor(private searchService: SearchService) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  onSearch() {
-    this.getSearchResult(this.words.trim().replace(/\s+/g, '+'));
-  }
-
-  getSearchResult(term: string) {
-    this.searchService.searchMusicByTerm(term)
-    .subscribe(data => {
-      this.musicList = data['results'];
-      console.log(this.musicList);
-    })
+  loadMusicList(list) {
+    this.musicList = list;
   }
 
 }
