@@ -17,14 +17,17 @@
         <li routerLinkActive="active"><a [routerLink]="['/about']">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a [routerLink]="['/auth']">Login</a></li>
-        <li class="dropdown">
+        <ng-template [ngIf]="!isLogin()">
+          <li><a [routerLink]="['/auth/login']">Login</a></li>
+          <li><a [routerLink]="['/auth/register']">Register</a></li>
+        </ng-template>
+        <li class="dropdown" *ngIf="isLogin()">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DummyUser <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Profile</a></li>
               <li><a href="#">Favorite</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Logout</a></li>
+              <li><a [routerLink]="['/auth/logout']">Logout</a></li>
             </ul>
           </li>
       </ul>
