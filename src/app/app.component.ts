@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   ngOnInit() {
     // set firebase configuration
-    firebase.initializeApp(environment.firebaseConfig);
+    firebase.initializeApp(environment.secret.firebaseConfig);
     // bug
     firebase.firestore().settings({ timestampsInSnapshots: true });
   }

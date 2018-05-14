@@ -3,6 +3,9 @@
 ## node
 package-lock.json
 
+## secret
+src/environments/secret.ts
+
 # compiled output
 /dist
 /dist-server
