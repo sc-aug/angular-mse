@@ -1,21 +1,81 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
+import { catchError, map, tap } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
+import {environment} from '../../environments/environment';
+import { AuthService } from './auth.service';
+
+import { Music } from '../music-page/music.interface';
+
+const baseUrl = environment.secret["firebaseConfig"]["databaseURL"];
 
 @Injectable()
 export class DbService {
     db: any;
     auth: any;
 
-    constructor(private router:Router) {
+    constructor(
+        private router:Router,
+        private http: HttpClient,
+        private authService: AuthService) {
+
         this.db = firebase.firestore();
         this.auth = firebase.auth();
-        console.log(this.db, this.auth);
     }
-    
+
+    addFavMusic(trackId: string) {
+        let token = this.authService.getToken();
+        let dbname = this.getEmail().replace('@', '_').replace('.', '_');
+        let url = `${baseUrl}/music_db/${dbname}/${trackId}.json?auth=${token}`;
+
+        return this.http.put(url, trackId);
+    }
+
+    rmFavMusic(trackId: string) {
+        let token = this.authService.getToken();
+        let dbname = this.getEmail().replace('@', '_').replace('.', '_');
+        let url = `${baseUrl}/music_db/${dbname}/${trackId}.json?auth=${token}`;
+
+        return this.http.delete(url);
+    }
+
+    getFavMusicList() {
+        let token = this.authService.getToken();
+        let dbname = this.getEmail().replace('@', '_').replace('.', '_');
+        let url = `${baseUrl}/music_db/${dbname}.json?auth=${token}`;
+
+        return this.http.get<Music[]>(url)
+            .pipe(
+                map(data => Object.keys(data)),
+                // tap(res => console.log(res)),
+                catchError(error => of(`Bad Promise: ${error}`))
+            );
+    }
+
+    getEmail() {
+        return localStorage.getItem("email");
+    }
+
+    //////////// below. using firestore beta ////////////
+
+    getFavList() {
+        let email = this.getEmail();
+
+        let favListObservable = Observable.fromPromise<Music[]>(
+            this.db.collection("fav-music").doc(email).get()
+                .then((docSnapshot) => {
+                    return Object.keys(docSnapshot.data());
+                })
+            );
+        return favListObservable;
+    }
+
+
     addFav(trackId: string) {
         let email = this.getEmail();
         let item = {};
@@ -66,62 +126,4 @@ export class DbService {
         });
     }
 
-    getFavList() {
-        let email = this.getEmail();
-
-        let favListObservable = Observable.fromPromise<any[]>(
-            this.db.collection("fav-music").doc(email).get()
-                .then((docSnapshot) => {
-                    return Object.keys(docSnapshot.data());
-                })
-            );
-        return favListObservable;
-    }
-
-    dummyCall1() {
-        this.db.collection("fav-music").doc("ccc@gmail.com")
-        .set({
-            trackid: ["1012n01dn1"]
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-
-    dummyCall2() {
-        this.db.collection("fav-music").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-            });
-        });
-    }
-
-    dummyCall3() {
-        this.db.collection("fav-music").doc("ccc@gmail.com")
-        .set({ trackId: ["gg12a01dn1"] }, { merge: true })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-
-    dummyCall4() {
-        this.db.collection("fav-music").doc("ccc@gmail.com")
-        .update({ trackId: ["123123", "123123"] })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-
-    getEmail() {
-        return localStorage.getItem("email");
-    }
 }

@@ -17,12 +17,15 @@ export class ResultListComponent implements OnInit {
   }
 
   onAddFavMusicClick(event) {
-    // console.log(event.target.id);
     this.addFavMusic(event.target.id);
   }
 
   addFavMusic(trackId: string) {
-    this.dbService.addFav(trackId);
+    this.dbService.addFavMusic(trackId)
+      .subscribe(
+        (resp) => console.log(resp),
+        (err) => console.log(err)
+      );
   }
 
 }

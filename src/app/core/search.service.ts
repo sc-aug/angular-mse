@@ -30,15 +30,15 @@ export class SearchService {
                 map(data => data['results']),
                 map((music) => {
                     if (music) {
-                        console.log(music);
+                        // console.log(music);
                         return music[0];
                     }
                     return null;
                 }),
-                tap( // Log the result or error
-                    data => console.log(data),
-                    error => console.log(error)
-                )
+                // tap( // Log the result or error
+                //     data => console.log(data),
+                //     error => console.log(error)
+                // )
             );
     }
 

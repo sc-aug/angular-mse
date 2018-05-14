@@ -7,21 +7,18 @@ import 'rxjs/add/observable/fromPromise';
 
 @Injectable()
 export class AuthService {
-    token: string;
+    private token: string;
 
     constructor(private router:Router) { }
 
     registerUser(email, password) {
         let registerObservable = Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((res) => {
-            console.log(res);
-            // this.router.navigate(['/']);
-            firebase.auth().currentUser.getIdToken()
-            .then((token:string) => {
-                this.token = token;
-                localStorage.setItem('userToken', token);
-                localStorage.setItem('email', email);
-            });
+            if (res) {
+                return "register success";
+            } else {
+                return "register failed"
+            }
         }).catch((error) => {
             console.log(error);
         }));
@@ -36,9 +33,14 @@ export class AuthService {
             // this.router.navigate(['/']);
             firebase.auth().currentUser.getIdToken()
             .then((token:string) => {
-                this.token = token;
-                localStorage.setItem('userToken', token);
-                localStorage.setItem('email', email);
+                if (token) {
+                    this.token = token;
+                    localStorage.setItem('userToken', token);
+                    localStorage.setItem('email', email);
+                    return "login success";
+                } else {
+                    return "login failed"
+                }
             });
         }).catch((error) => {
             console.log(error);
@@ -62,6 +64,12 @@ export class AuthService {
             localStorage.getItem('userToken') !== null &&
             localStorage.getItem('email') != null) ?
             true : false;
+    }
+
+    getToken() {
+        firebase.auth().currentUser.getIdToken()
+            .then((t) => this.token = t);
+        return this.token;
     }
 
 }
