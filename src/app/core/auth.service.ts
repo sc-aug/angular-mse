@@ -11,8 +11,8 @@ export class AuthService {
 
     constructor(private router:Router) { }
 
-    registerUser(username, password) {
-        let registerObservable = Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(username, password)
+    registerUser(email, password) {
+        let registerObservable = Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((res) => {
             console.log(res);
             // this.router.navigate(['/']);
@@ -20,6 +20,7 @@ export class AuthService {
             .then((token:string) => {
                 this.token = token;
                 localStorage.setItem('userToken', token);
+                localStorage.setItem('email', email);
             });
         }).catch((error) => {
             console.log(error);
@@ -28,8 +29,8 @@ export class AuthService {
         return registerObservable;
     }
     
-    loginUser(username, password) {
-        let loginObservable = Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(username, password)
+    loginUser(email, password) {
+        let loginObservable = Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(email, password)
         .then((res) => {
             console.log(res);
             // this.router.navigate(['/']);
@@ -37,6 +38,7 @@ export class AuthService {
             .then((token:string) => {
                 this.token = token;
                 localStorage.setItem('userToken', token);
+                localStorage.setItem('email', email);
             });
         }).catch((error) => {
             console.log(error);
@@ -46,13 +48,19 @@ export class AuthService {
     }
 
     logoutUser() {
-        firebase.auth().signOut();
+        firebase.auth().signOut()
+            .then(() => { })
+            .catch(err => console.log(err));
+        
         localStorage.removeItem('userToken');
+        localStorage.removeItem('email');
         this.token = null;
     }
 
     isAuthenticated():boolean {
-        return (localStorage.getItem('userToken') !== null) ?
+        return (
+            localStorage.getItem('userToken') !== null &&
+            localStorage.getItem('email') != null) ?
             true : false;
     }
 

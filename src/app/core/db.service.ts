@@ -8,24 +8,37 @@ import 'rxjs/add/observable/fromPromise';
 @Injectable()
 export class DbService {
     db: any;
+    auth: any;
 
     constructor(private router:Router) {
         this.db = firebase.firestore();
+        this.auth = firebase.auth();
+        console.log(this.db, this.auth);
     }
-
+    
     addFav(trackId: string) {
         let email = this.getEmail();
         let item = {};
         item[trackId] = [];
 
-        this.db.collection("fav-music").doc(email)
-        .set(item, { merge: true })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
+        this.auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log("We are authenticated now!");
+
+                this.db.collection("fav-music").doc(email)
+                    .set(item, { merge: true })
+                    .then(function() {
+                        console.log("Document successfully written!");
+                    })
+                    .catch(function(error) {
+                        console.error("Error writing document: ", error);
+                    });
+
+            } else {
+                console.log("MYERROR: login first please.");
+            }
         });
+            
     }
 
     rmFav(trackId: string) {
@@ -33,14 +46,23 @@ export class DbService {
         let item = {};
         item[trackId] = firebase.firestore.FieldValue.delete();
 
-        this.db.collection("fav-music").doc(email)
-        .update({item})
-        .then(function() {
-            console.log("trackId removed!");
-        })
-        .catch(function(error) {
-            // The document probably doesn't exist.
-            console.error("Error removing trackId from doc: ", error);
+        this.auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log("We are authenticated now!");
+                    
+                this.db.collection("fav-music").doc(email)
+                .update({item})
+                .then(function() {
+                    console.log("trackId removed!");
+                })
+                .catch(function(error) {
+                    // The document probably doesn't exist.
+                    console.error("Error removing trackId from doc: ", error);
+                });
+
+            } else {
+                console.log("MYERROR: login first please.");
+            }
         });
     }
 
@@ -100,7 +122,6 @@ export class DbService {
     }
 
     getEmail() {
-        localStorage.getItem("email");
-        return "admin@admin.com"
+        return localStorage.getItem("email");
     }
 }
