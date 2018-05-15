@@ -39,7 +39,11 @@ export class DbService {
         let dbname = this.getEmail().replace('@', '_').replace('.', '_');
         let url = `${baseUrl}/music_db/${dbname}/${trackId}.json?auth=${token}`;
 
-        return this.http.delete(url);
+        return this.http.delete(url)
+            .pipe(
+                tap(data => console.log(data)),
+                catchError(error => of(`Bad Promise: ${error}`))
+            );
     }
 
     getFavMusicList() {
