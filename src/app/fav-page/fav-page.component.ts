@@ -23,7 +23,6 @@ export class FavPageComponent implements OnInit {
       .subscribe(
         (data) => {
           this.favTrackList = Object.keys(data);
-          console.log("TEST ", data);
         },
         (err) => console.log(err)
       );
