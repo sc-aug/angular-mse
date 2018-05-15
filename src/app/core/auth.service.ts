@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
@@ -12,41 +11,27 @@ export class AuthService {
     constructor(private router:Router) { }
 
     registerUser(email, password) {
-        let registerObservable = Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((res) => {
-            if (res) {
-                return "register success";
-            } else {
-                return "register failed"
-            }
-        }).catch((error) => {
-            console.log(error);
-        }));
-
-        return registerObservable;
+        return Observable.fromPromise(firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+                return res;
+            }).catch((error) => {
+                console.log(error);
+            }));
     }
     
     loginUser(email, password) {
-        let loginObservable = Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((res) => {
-            console.log(res);
-            // this.router.navigate(['/']);
-            firebase.auth().currentUser.getIdToken()
-            .then((token:string) => {
-                if (token) {
+        return Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(res => {
+                // login success get token
+                firebase.auth().currentUser.getIdToken()
+                .then((token:string) => {
                     this.token = token;
-                    localStorage.setItem('userToken', token);
+                    localStorage.setItem('user_token', token);
                     localStorage.setItem('email', email);
-                    return "login success";
-                } else {
-                    return "login failed"
-                }
-            });
-        }).catch((error) => {
-            console.log(error);
-        }));
-
-        return loginObservable;
+                });
+                return res;
+            })
+            .catch((error) => console.log(error)));
     }
 
     logoutUser() {
@@ -54,20 +39,20 @@ export class AuthService {
             .then(() => { })
             .catch(err => console.log(err));
         
-        localStorage.removeItem('userToken');
+        localStorage.removeItem('user_token');
         localStorage.removeItem('email');
         this.token = null;
     }
 
     isAuthenticated():boolean {
         return (
-            localStorage.getItem('userToken') !== null &&
+            localStorage.getItem('user_token') !== null &&
             localStorage.getItem('email') != null) ?
             true : false;
     }
 
     getToken() {
-        return localStorage.getItem('userToken');
+        return localStorage.getItem('user_token');
         // firebase.auth().currentUser.getIdToken()
         //     .then((t) => this.token = t);
         // return this.token;

@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngIf="isLogin()" scope="col"></th>
+      <th scope="col">Track</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Release</th>
+      <th scope="col">Collection</th>
+      <th scope="col">Sample</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let music of musicList; let i = index">
+    
+    <tr app-result-table-row [music]="music">
+
+    </tr>
+  </tbody>
+</table>

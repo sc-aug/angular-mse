@@ -21,13 +21,14 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     let data = form.value;
-    this.register(data.email, data.password);
+    this.registerUser(data.email, data.password);
   }
 
-  register(e: string, p: string) {
+  registerUser(e: string, p: string) {
     this.auth.registerUser(e, p).subscribe(
-      data => {
-        //this.router.navigate([this.returnUrl]);
+      res => {
+        console.log(res);
+        this.router.navigate(['/auth', 'login']);
       },
       err => {
         console.log(err);
