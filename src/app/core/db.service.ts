@@ -10,8 +10,6 @@ import { of } from 'rxjs/observable/of';
 import {environment} from '../../environments/environment';
 import { AuthService } from './auth.service';
 
-import { Music } from '../music-page/music.interface';
-
 const baseUrl = environment.secret["firebaseConfig"]["databaseURL"];
 
 @Injectable()
@@ -49,9 +47,9 @@ export class DbService {
         let dbname = this.getEmail().replace('@', '_').replace('.', '_');
         let url = `${baseUrl}/music_db/${dbname}.json?auth=${token}`;
 
-        return this.http.get<Music[]>(url)
+        return this.http.get<any[]>(url)
             .pipe(
-                map(data => Object.keys(data)),
+                // map(data => data),
                 // tap(res => console.log(res)),
                 catchError(error => of(`Bad Promise: ${error}`))
             );
@@ -66,7 +64,7 @@ export class DbService {
     getFavList() {
         let email = this.getEmail();
 
-        let favListObservable = Observable.fromPromise<Music[]>(
+        let favListObservable = Observable.fromPromise<any[]>(
             this.db.collection("fav-music").doc(email).get()
                 .then((docSnapshot) => {
                     return Object.keys(docSnapshot.data());

@@ -67,9 +67,10 @@ export class AuthService {
     }
 
     getToken() {
-        firebase.auth().currentUser.getIdToken()
-            .then((t) => this.token = t);
-        return this.token;
+        return localStorage.getItem('userToken');
+        // firebase.auth().currentUser.getIdToken()
+        //     .then((t) => this.token = t);
+        // return this.token;
     }
 
 }

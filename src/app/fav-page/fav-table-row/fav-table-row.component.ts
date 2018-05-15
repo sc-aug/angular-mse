@@ -11,7 +11,7 @@ import { Music } from '../../music-page/music.interface';
   providers: [SearchService]
 })
 export class FavTableRowComponent implements OnInit {
-  @Input() tId;
+  @Input() tId: any;
   music: Music;
   constructor(
     private searchService: SearchService,
