@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { NavTopComponent } from './nav-top/nav-top.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FavPageComponent } from './fav-page/fav-page.component';
-import { AboutPageComponent } from './about-page/about-page.component';
 import { AuthComponent } from './auth/auth.component';
 // Search
 import { SearchPageComponent } from './search-page/search-page.component';
@@ -38,7 +37,6 @@ import { FavTableRowComponent } from './fav-page/fav-table-row/fav-table-row.com
     HomePageComponent,
     SearchPageComponent,
     FavPageComponent,
-    AboutPageComponent,
     AuthComponent,
     LoginComponent,
     RegisterComponent,
