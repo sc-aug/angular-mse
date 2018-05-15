@@ -10,10 +10,13 @@
       <th scope="col">Sample</th>
     </tr>
   </thead>
-  <tbody *ngFor="let music of musicList; let i = index">
-    
-    <tr app-result-table-row [music]="music">
-
+  <tbody>
+        
+    <tr
+      app-result-table-row
+      *ngFor="let music of musicList; let i = index"
+      [music]="music">
     </tr>
+
   </tbody>
 </table>
