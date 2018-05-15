@@ -1,3 +1,22 @@
-<div *ngFor="let trackId of trackIdList">
-  <app-fav-table-row [tId]="trackId"></app-fav-table-row>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Track</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Release</th>
+      <th scope="col">Collection</th>
+      <th scope="col">Sample</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr
+      app-fav-table-row
+      *ngFor="let trackId of trackIdList"
+      [tId]="trackId"></tr>
+    
+  </tbody>
+</table>
+  

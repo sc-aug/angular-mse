@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-fav-table',
@@ -9,9 +10,13 @@ import { Observable } from 'rxjs/Observable';
 export class FavTableComponent implements OnInit {
   @Input() trackIdList: any[];
   
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  isLogin() {
+    this.authService.isAuthenticated();
   }
 
 }

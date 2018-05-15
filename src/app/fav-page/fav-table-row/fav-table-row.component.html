@@ -1,3 +1,36 @@
-<div class="jumbotron">
-  {{ music?.trackId }} {{ music?.artistName }}
-</div>
+<ng-template [ngIf]="music!=null">
+
+  <td><span class="badge" (click)="onDelete()">Delete</span></td>
+<td><a *ngIf="music"
+  [routerLink]="['/music', music?.trackId]">
+  {{ (music?.trackCensoredName.length > 20) ?
+    music?.trackCensoredName.substring(0, 20) + '...'
+    : music?.trackCensoredName }}</a>
+</td>
+<td><a *ngIf="music"
+  [routerLink]="['/artist', music?.artistId]">
+  {{ (music?.artistName.length > 15) ?
+  music?.artistName.substring(0, 15) + '...'
+  : music?.artistName }}</a>
+</td>
+<td>
+  {{ music?.primaryGenreName }}
+</td>
+<td>
+  {{ music?.releaseDate.substring(0, 10) }}
+</td>
+<td>
+  {{  music?.collectionCensoredName ? (
+        ( music?.collectionCensoredName.length > 20) ?
+          music?.collectionCensoredName.substring(0, 20) + '...'
+        : music?.collectionCensoredName)
+      : "-" }}
+</td>
+<td>
+  <audio controls controlsList="nodownload" preload="none">
+    <source src="{{ music?.previewUrl }}" type="audio/mp4">
+    audio element not supported.
+  </audio>
+</td>
+
+</ng-template>
