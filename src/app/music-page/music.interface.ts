@@ -6,9 +6,9 @@ export interface Music {
     collectionCensoredName?: string;
     previewUrl?: string;
     kind?: string;
-    artistId?: number;
-    collectionId?: number;
-    trackId?: number;
+    artistId?: string;
+    collectionId?: string;
+    trackId?: string;
     artworkUrl30?: string;
     country?: string
 }
