@@ -32,6 +32,7 @@ import { AppRoutes } from './app.routes';
 import { SearchService } from './core/search.service';
 import { AuthService } from './core/auth.service';
 import { DbService } from './core/db.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { DbService } from './core/db.service';
     ArtistPageComponent,
     SearchBoxComponent,
     FavTableComponent,
-    FavTableRowComponent
+    FavTableRowComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
