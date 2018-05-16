@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -39,6 +39,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { AuthModule } from './auth/auth.module';
 import { SearchPageModule } from './search-page/search-page.module';
 import { FavPageModule } from './fav-page/fav-page.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -46,16 +47,18 @@ import { FavPageModule } from './fav-page/fav-page.module';
     NavTopComponent,
     HomePageComponent,
     MusicPageComponent,
-    ArtistPageComponent,
-    ProfileComponent
+    ArtistPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    
     AuthModule,
     SearchPageModule,
     FavPageModule,
+    ProfileModule,
+    
     AppRoutingModule
   ],
   providers: [
