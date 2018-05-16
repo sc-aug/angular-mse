@@ -33,7 +33,8 @@ import { SearchService } from './core/search.service';
 import { AuthService } from './core/auth.service';
 import { DbService } from './core/db.service';
 import { ProfileComponent } from './profile/profile.component';
-
+// Guard
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ProfileComponent } from './profile/profile.component';
   providers: [
     // SearchService,
     AuthService,
-    DbService
+    DbService,
+    AuthGuard
   ],
   bootstrap: [
     AppComponent
