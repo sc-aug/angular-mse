@@ -9,7 +9,7 @@ import { Music } from '../music-page/music.interface';
   styleUrls: ['./fav-page.component.css']
 })
 export class FavPageComponent implements OnInit {
-  private favTrackList: any[];
+  favTrackList: any[];
   constructor(private dbService: DbService) {
   }
 
