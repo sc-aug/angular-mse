@@ -26,7 +26,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 // Other
 import { MusicPageComponent } from './music-page/music-page.component';
 import { ArtistPageComponent } from './artist-page/artist-page.component';
-import { ProfileComponent } from './profile/profile.component';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 // Serivces
@@ -40,6 +39,7 @@ import { AuthModule } from './auth/auth.module';
 import { SearchPageModule } from './search-page/search-page.module';
 import { FavPageModule } from './fav-page/fav-page.module';
 import { ProfileModule } from './profile/profile.module';
+import { ProfileService } from './core/profile.service';
 
 @NgModule({
   declarations: [
@@ -65,6 +65,7 @@ import { ProfileModule } from './profile/profile.module';
     // SearchService,
     AuthService,
     DbService,
+    ProfileService,
     AuthGuard
   ],
   bootstrap: [
