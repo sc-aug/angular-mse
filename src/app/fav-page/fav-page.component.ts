@@ -22,7 +22,7 @@ export class FavPageComponent implements OnInit {
     this.dbService.getFavMusicList()
       .subscribe(
         (data) => {
-          this.favTrackList = Object.keys(data);
+          this.favTrackList = data? Object.keys(data) : null;
         },
         (err) => console.log(err)
       );
