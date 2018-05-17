@@ -89,7 +89,9 @@ export class ProfileComponent implements OnInit {
             ads[k]['street'], ads[k]['city'],
             ads[k]['state'], ads[k]['zipcode']);
         }
-        this.rmAddress(0);
+        if (this.addressesArr.length > 1) {
+          this.rmAddress(0);
+        }
       });
   }
 
