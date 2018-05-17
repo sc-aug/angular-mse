@@ -60,4 +60,7 @@ export class AuthService {
         return this.token;
     }
 
+    getEmail() {
+        return localStorage.getItem("email");
+    }
 }
